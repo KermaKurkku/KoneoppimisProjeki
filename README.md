@@ -5,7 +5,7 @@ Kehitys tapahtuu virtuaaliympäristössä
 
 Virtuaaliympäristön luonti
 ```bash
-virtualenv -p python .envs/envname
+virtualenv -p python3 .envs/envname
 ```
 envname=projektin nimi
 
