@@ -1,2 +1,4 @@
 *.csv
 .idea
+.envs/*
+!.envs/empty.txt
