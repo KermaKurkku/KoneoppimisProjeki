@@ -6,8 +6,8 @@ from sklearn import linear_model
 from sklearn.metrics import mean_squared_error, r2_score
 
 # Load the dataset
-data_X = np.array([5, 15, 25, 35, 45, 55]).reshape((-1, 1))
-data_y = np.array([5, 20, 14, 32, 22, 38])
+data_X = np.array([5, 15, 25, 35, 45, 55, 66, 67, 77]).reshape((-1, 1))
+data_y = np.array([5, 20, 14, 32, 22, 18, 36, 28, 14])
 
 # Use only one feature
 # data_X = data_X[:, np.newaxis, 2]
@@ -31,7 +31,7 @@ data_y_pred = regr.predict(data_X_test)
 
 # The intercept (B0)
 print('intercept:', regr.intercept_)
-# The coefficients (B1, ...)
+# The coefficients (B1)
 print("Coefficients: \n", regr.coef_)
 # The mean squared error
 print("Mean squared error: %.2f" % mean_squared_error(data_y_test, data_y_pred))
