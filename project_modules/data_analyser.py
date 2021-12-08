@@ -13,12 +13,12 @@ data_y = np.array([5, 20, 14, 32, 22, 38])
 # data_X = data_X[:, np.newaxis, 2]
 
 # Split the data into training/testing sets
-data_X_train = data_X[:-2]
-data_X_test = data_X[-2:]
+data_X_train = data_X[:-3]
+data_X_test = data_X[-3:]
 
 # Split the targets into training/testing sets
-data_y_train = data_y[:-2]
-data_y_test = data_y[-2:]
+data_y_train = data_y[:-3]
+data_y_test = data_y[-3:]
 
 # Create linear regression object
 regr = linear_model.LinearRegression()
@@ -29,7 +29,9 @@ regr.fit(data_X_train, data_y_train)
 # Make predictions using the testing set
 data_y_pred = regr.predict(data_X_test)
 
-# The coefficients
+# The intercept (B0)
+print('intercept:', regr.intercept_)
+# The coefficients (B1, ...)
 print("Coefficients: \n", regr.coef_)
 # The mean squared error
 print("Mean squared error: %.2f" % mean_squared_error(data_y_test, data_y_pred))
