@@ -1,4 +1,12 @@
-# JEE JEE TENSORFLOW
+# Koneoppimisprojekti 2021
+#### HSL Kaupunkipyörien asematilanne ennustaja
+
+## Opetusmatereiaali
+Opetusmateriaalina käytetään vuoden 2020 HSL:n kaupunkipyörillä ajettujen matkojen avointa dataa.
+
+Tietoa datasta: https://www.hsl.fi/hsl/avoin-data#kaupunkipyorilla-ajetut-matkat
+
+Linkki datan lataamiseksi: https://dev.hsl.fi/citybikes/od-trips-2020/od-trips-2020.zip
 
 ## Devausohjeita
 Kehitys tapahtuu virtuaaliympäristössä
