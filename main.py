@@ -18,16 +18,22 @@ def start_validate_ui():  # Tämän metodin sisään kutsu algoritmin validointi
 
 
 def start_use_ui():  # Tällä metodilla voidaan käyttää algoritmiä
-    stations = ["asema1", "asema2", "asema3"]  # tähän tulee csv_readerillä luettu lista asemista
+    stations = csv_reader.get_stations().to_dict().get('Station name') #{1: "asema1", 2: "asema2", 3: "asema3"}  # tähän tulee csv_readerillä luettu lista asemista
 
-    station_found = False
-    while not station_found:
-        selected_station = input("Syötä Kaupunkipyöräaseman nimi:").lower()
-        if selected_station in stations:
-            station_found = True
+    while True:
+        selected_station = input("Syötä Kaupunkipyöräaseman nimi (saat listan asemista kirjoittamalla \"help\"):").lower()
+        if selected_station == "help":
+            print("{:<10} {:<20}".format('Aseman id', 'Aseman nimi'))
+            for station_id, station_name in stations.items():
+                print("{:<10} {:<20}".format(station_id, station_name))
+            continue
+        elif selected_station in stations:
             print(f"Kaupunkipyöräasema {selected_station} löytyi\n")
+            break
         else:
             print(f"Kaupunkipyöräasemaa {selected_station} ei löytynyt!")
+            continue
+
     weekdays_fi = {
         1: "maanantai",
         2: "tiistai",
