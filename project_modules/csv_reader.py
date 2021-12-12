@@ -12,6 +12,11 @@ data_types = {
 	'Departure': str, 'Return': str, 'Departure station id': int, 'Return station id': int
 }
 
+data_types_alt = {
+	'Departure day': int, 'Deparure hour': int, 'Return day': int, 'Return hour': int, 'Departure station id': int, 'Return station id': int
+}
+
+
 '''
 Reads a csv file using the pandas library
 Return:
@@ -19,8 +24,7 @@ Return:
 '''
 def read_data():
 	data = pd.read_csv(str(pathlib.Path().resolve())+
-		'/Data/2020.csv', index_col=False)
-	data = data.astype(data_types)
+		'/Data/station_data.csv', index_col=False, dtype=data_types_alt)
 	return data
 
 '''
