@@ -8,7 +8,7 @@ Tietoa datasta: https://www.hsl.fi/hsl/avoin-data#kaupunkipyorilla-ajetut-matkat
 
 Linkki datan lataamiseksi: https://dev.hsl.fi/citybikes/od-trips-2020/od-trips-2020.zip
 
-Linkki kaupunkipyöräasemien dataan: https://hri.fi/data/fi/dataset/hsl-n-kaupunkipyoraasemat
+Linkki kaupunkipyöräasemien dataan: https://opendata.arcgis.com/datasets/726277c507ef4914b0aec3cbcfcbfafc_0.csv
 
 ## Devausohjeita
 Kehitys tapahtuu virtuaaliympäristössä
@@ -35,6 +35,10 @@ deactivate
 ### Vaaditut ulkopuoliset kirjastot
 
 Vaaditut kirjastot löytyvät tiedostosta requirements.txt
+
+```bash
+pip install -r requirements.txt
+```
 
 ## Datan tekeminen
 
