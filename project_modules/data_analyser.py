@@ -35,13 +35,13 @@ data_y_test = data_y[-3:]
 
 def split_data():
     global data_X_train
-    data_X_train = data_X[:-30]
+    data_X_train = data_X[:-3]
     global data_X_test
-    data_X_test = data_X[-30:]
+    data_X_test = data_X[-3:]
     global data_y_train
-    data_y_train = data_y[:-30]
+    data_y_train = data_y[:-3]
     global data_y_test
-    data_y_test = data_y[-30:]
+    data_y_test = data_y[-3:]
 
 
 # Create linear regression object
