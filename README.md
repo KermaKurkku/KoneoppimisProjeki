@@ -32,6 +32,10 @@ Virtuaaliympäristön sulkemiseksi
 deactivate
 ```
 
+### Vaaditut ulkopuoliset kirjastot
+
+Vaaditut kirjastot löytyvät tiedostosta requirements.txt
+
 ## Datan tekeminen
 
 Lataa data HSL netisivuilta.
