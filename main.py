@@ -7,46 +7,60 @@ import project_modules.utils as utils
 
 def start_teach_ui():  # Tämän metodin sisään kutsut algoritmin opettamiseksi
     station_data = csv_reader.get_stations().to_dict(
-        'split')  # {1: "asema1", 2: "asema2", 3: "asema3"}  # tähän tulee csv_readerillä luettu lista asemista
+        'split')  # tähän tulee csv_readerillä luettu lista asemista
     station_names = {}
     for data in station_data.get('data'):
         station_names[data[0]] = data[1]
+
     while True:
+        model = {}
         data = csv_reader.read_data()
-
+        indeksi = -1
         for st_id, station in station_names.items():
-
+            indeksi += 1
             st_dep = utils.filter_departure_station(data, st_id)
             st_ret = utils.filter_return_station(data, st_id)
+            if st_dep.empty:
+                continue
+            if st_ret.empty:
+                continue
             for weekday in range(0, 7):
                 data_out = {}
                 data_filtered_dep = utils.filter_departure_date(st_dep, weekday)
                 data_filtered_ret = utils.filter_departure_date(st_ret, weekday)
-                original_stdout = sys.stdout  # Save a reference to the original standard output
-                '''filename = 'Data/asemadata/' + station + '_' + str(weekday) + '.txt'
-                
-                with open(filename, 'w') as f:
-                    sys.stdout = f  # Change the standard output to the file we created.
-                    print(data_filtered)
-                    sys.stdout = original_stdout  # Reset the standard output to its original value
-                #data_analyser.set_data(data_filtered)
-                '''
+
                 for i_qwe in range(len(data_filtered_dep.index)):
                     data_out[i_qwe] = -1
 
                 save_i = len(data_out)
                 for i_etr in range(len(data_filtered_ret.index)):
-                    data_out[i_etr+save_i] = 1
+                    data_out[i_etr + save_i] = 1
                 sum_asd = 0
                 for id_asd, value in data_out.items():
                     sum_asd = sum_asd + value
                     data_out[id_asd] = sum_asd
+
+                # data_analyser.set_data(data_filtered)
+
                 data_analyser.set_data(data_out)
                 data_analyser.split_data()
                 data_analyser.train()
+                if station in model:
+                    model[station].update({weekday: data_analyser.get_coef()})
+                    #print(model)
+                else:
+                    model[station] = {weekday: data_analyser.get_coef()}
                 print(station + ', ' + str(weekday) + ': ' + str(data_analyser.get_coef()))
+        original_stdout = sys.stdout  # Save a reference to the original standard output
+        filename = 'Data/asemadata/' + str(indeksi) + station + '_' + str(weekday) + '.txt'
+        print(model)
+        with open('Data/asemadata/testimodel.txt', 'w') as f:
+            sys.stdout = f  # Change the standard output to the file we created.
+            print(model)
+            sys.stdout = original_stdout  # Reset the standard output to its original value
+
         # print(data)
-        data = data.get('Departure day').tolist()
+        #data = data.get('Departure day').tolist()
         # print(data)
         # data_analyser.set_data(data)
         # data_analyser.train()
