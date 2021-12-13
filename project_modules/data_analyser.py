@@ -14,9 +14,9 @@ data_y = np.array([5, 20, 14, 32, 22, 18, 36, 28, 14])
 
 def set_data(data):
     global data_X
-    data_X = np.array(data[0]).reshape((-1, 1))
+    data_X = np.array(list(data.keys())).reshape((-1, 1))
     global data_y
-    data_y = np.array(data[1])
+    data_y = np.array(list(data.values()))
 
 
 # Use only one feature
