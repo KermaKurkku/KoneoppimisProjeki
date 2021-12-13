@@ -93,6 +93,12 @@ def get_prediction_coef():
     return r2_score(data_y_test, data_y_pred)
 
 
+def get_r2score():
+    global data_X_train
+    global data_y_train
+    return r2_score(data_X_train, data_y_train)
+
+
 # Plot outputs
 #plt.scatter(data_X_test, data_y_test, color="black")
 #plt.plot(data_X_test, data_y_pred, color="blue", linewidth=3)
