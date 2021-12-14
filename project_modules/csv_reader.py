@@ -9,7 +9,7 @@ data_types_old = {
 	'Return station id': float, 'Return station name': str, 'Covered distance (m)': float, 'Duration (sec.)': int
 }
 data_types = {
-	'Departure': str, 'Return': str, 'Departure station id': int, 'Return station id': int
+	'Departure': float, 'Return': float, 'Departure station id': int, 'Return station id': int
 }
 
 data_types_alt = {
@@ -24,7 +24,7 @@ Return:
 '''
 def read_data():
 	data = pd.read_csv(str(pathlib.Path().resolve())+
-		'/Data/station_data.csv', index_col=False)
+		'/Data/station_data.csv', index_col=False, dtype=data_types)
 	return data
 
 '''

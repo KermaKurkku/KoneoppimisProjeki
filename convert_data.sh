@@ -22,10 +22,9 @@ validate() {
 
 combine() {
     gawk 'BEGIN {FS=","; OFS=",";}
-		NR==1 {print "Departure,Return,Departure station id,Return station id"}   
         {   
 			gsub(/"/, "")
-			if ((NR!=1 && NF!=4) || $1<0 || $2<0 || $3<0 || $4<0) {
+			if ((NR!=1 && NF!=4) || $1<0 || $2<0 || $3<0 || $4<0 || $0 ~/[a-zA-Z]/) {
 				e++
 				print $0 > "/dev/stderr"
 			} else {
@@ -65,7 +64,7 @@ done
 
 cd /tmp/convertDataPy
 mkdir -p $cwd/Data
-echo "" > $cwd/Data/station_data.csv
+echo "Departure,Return,Departure station id,Return station id" > $cwd/Data/station_data.csv
 
 for i in temp-*.csv
 do
