@@ -13,16 +13,19 @@ def start_teach_ui():  # Tämän metodin sisään kutsut algoritmin opettamiseks
         station_names[data[0]] = data[1]
 
     while True:
-        model = {}
+        if input("Haluatko luoda mallin? k/e").lower() != "k":
+            break
         data = csv_reader.read_data()
-        #  indeksi = -1
+
         for st_id, station in station_names.items():
-            #  indeksi += 1
+            print('Valmistellaan dataa asemalle ' + station + '... ', end='')
             st_dep = utils.filter_departure_station(data, st_id)
             st_ret = utils.filter_return_station(data, st_id)
             if st_dep.empty:
+                print('Asemaa ei löytynyt datasta!')
                 continue
             if st_ret.empty:
+                print('Asemaa ei löytynyt datasta!')
                 continue
 
             data_out = {}
@@ -37,10 +40,17 @@ def start_teach_ui():  # Tämän metodin sisään kutsut algoritmin opettamiseks
                     data_out[ret_row['Return']] = 1
                 else:
                     data_out[ret_row['Return']] += 1
+            print('valmis!')
+            print('Luodaan mallia asemalle ' + station + '... ', end='')
             data_analyser.set_data(data_out)
             data_analyser.split_data()
             data_analyser.train()
-            print(station + ': ' + str(data_analyser.get_coef()))
+            data_analyser.predict()
+            data_analyser.plot_outputs(station)
+            data_analyser.save_model(str(st_id))
+            print('valmis!')
+
+
             '''    
             for weekday in range(0, 7):
                 data_out = {}
@@ -86,8 +96,7 @@ def start_teach_ui():  # Tämän metodin sisään kutsut algoritmin opettamiseks
         # data_analyser.train()
         # print(data_analyser.get_prediction_coef())
         '''
-        if input("Lopetetaanko opettaminen k/e").lower() == "k":
-            break
+
 
 
 def start_validate_ui():  # Tämän metodin sisään kutsu algoritmin validointia varten
@@ -102,7 +111,7 @@ def start_use_ui():  # Tällä metodilla voidaan käyttää algoritmiä
         'split')  # {1: "asema1", 2: "asema2", 3: "asema3"}  # tähän tulee csv_readerillä luettu lista asemista
     station_names = {}
     for data in station_data.get('data'):
-        station_names[data[0]] = data[1]
+        station_names[data[1].lower()] = data[0]
     while True:
         selected_station = input(
             "Syötä Kaupunkipyöräaseman nimi (saat listan asemista kirjoittamalla \"help\"):").lower()
@@ -111,7 +120,7 @@ def start_use_ui():  # Tällä metodilla voidaan käyttää algoritmiä
             for station_id, station_name in station_names.items():
                 print("{:<10} {:<20}".format(station_id, station_name))
             continue
-        elif selected_station in [station.lower() for station in station_names.values()]:
+        elif selected_station in [station.lower() for station in station_names.keys()]:
             print(f"Kaupunkipyöräasema {selected_station} löytyi\n")
             break
         else:
@@ -130,12 +139,17 @@ def start_use_ui():  # Tällä metodilla voidaan käyttää algoritmiä
     print("{:<8} {:<15}".format('Avain', 'Viikonpäivä'))
     for key, weekday in weekdays_fi.items():
         print("{:<8} {:<15}".format(key, weekday))
-    weekday = input("\nSyötä viikonpäivää vastaava avain:")
-    mock_data = {1: {0: 1, 1: 2, 2: 3, 3: 4, 4: 5, 5: 6, 6: 7}}
-    summa = 0
-    for x in range(int(weekday)):
-        summa += mock_data[station_names[selected_station]][x]
-    print('pyöriä on: ' + str(summa))
+    while True:
+        weekday_key = input("\nSyötä viikonpäivää vastaava avain:")
+        hour = input("\nSyötä tunti:")
+
+        timestamp = str(weekday_key)+'.'+str(hour)
+
+        data_analyser.load_model(str(station_names[selected_station]))
+
+        print('ennustus: ', data_analyser.do_predict(timestamp))
+        if input("Lopetetaanko ennustus k/e").lower() == "k":
+            break
 
 
 if __name__ == "__main__":
