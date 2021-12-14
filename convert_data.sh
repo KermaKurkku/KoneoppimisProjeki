@@ -21,10 +21,17 @@ validate() {
 }
 
 combine() {
-    gawk 'BEGIN {FS=","; OFS=",";}         
+    gawk 'BEGIN {FS=","; OFS=",";}
+		NR==1 {print "Departure,Return,Departure station id,Return station id"}   
         {   
-			print $0
-        }
+			gsub(/"/, "")
+			if ((NR!=1 && NF!=4) || $1<0 || $2<0 || $3<0 || $4<0) {
+				e++
+				print $0 > "/dev/stderr"
+			} else {
+				print $0
+			}
+        } END {print "Incorrect rows ",  e > "/dev/stderr"}
     ' "$1" 
 }
 
@@ -57,15 +64,16 @@ done
 
 
 cd /tmp/convertDataPy
-echo "" > station_data-temp.csv
+mkdir -p $cwd/Data
+echo "" > $cwd/Data/station_data.csv
+
 for i in temp-*.csv
 do
 	echo "Combining files"
-	combine $i >> station_data-temp.csv
+	combine $i >> $cwd/Data/station_data.csv
 done
 
-mkdir -p $cwd/Data
 
-convert station_data-temp.csv > $cwd/Data/station_data.csv
+#convert station_data-temp.csv > $cwd/Data/station_data.csv
 
 rm -rf /tmp/convertDataPy

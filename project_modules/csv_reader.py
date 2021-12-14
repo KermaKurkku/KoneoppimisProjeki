@@ -24,7 +24,7 @@ Return:
 '''
 def read_data():
 	data = pd.read_csv(str(pathlib.Path().resolve())+
-		'/Data/station_data.csv', index_col=False, dtype=data_types_alt)
+		'/Data/station_data.csv', index_col=False)
 	return data
 
 '''
