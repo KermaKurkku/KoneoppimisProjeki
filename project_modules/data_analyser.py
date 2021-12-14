@@ -32,16 +32,16 @@ def split_data():
     global data_X_test
     global data_y_train
     global data_y_test
-    data_X_train = data_X[:-3]
-    data_X_test = data_X[-3:]
-    data_y_train = data_y[:-3]
-    data_y_test = data_y[-3:]
+    data_X_train = data_X[:-int((len(data_X)*0.7))]
+    data_X_test = data_X[-int((len(data_X)*0.3)):]
+    data_y_train = data_y[:-int((len(data_X)*0.7))]
+    data_y_test = data_y[-int((len(data_X)*0.3)):]
 
 def train():
     global regr
     regr.fit(data_X_train, data_y_train)
     print('score',regr.score(data_X_test, data_y_test))
-    print('Cross val score', cross_val_score(regr, data_X, data_y, cv=5))
+    print('Cross val score', cross_val_score(regr, data_X_train, data_y_train, cv=5))
 
 def predict():
     global data_y_pred

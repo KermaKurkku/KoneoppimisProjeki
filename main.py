@@ -15,15 +15,33 @@ def start_teach_ui():  # Tämän metodin sisään kutsut algoritmin opettamiseks
     while True:
         model = {}
         data = csv_reader.read_data()
-        indeksi = -1
+        #  indeksi = -1
         for st_id, station in station_names.items():
-            indeksi += 1
+            #  indeksi += 1
             st_dep = utils.filter_departure_station(data, st_id)
             st_ret = utils.filter_return_station(data, st_id)
             if st_dep.empty:
                 continue
             if st_ret.empty:
                 continue
+
+            data_out = {}
+
+            for dep_i, dep_row in st_dep.iterrows():
+                if dep_row['Departure'] not in data_out:
+                    data_out[dep_row['Departure']] = -1
+                else:
+                    data_out[dep_row['Departure']] -= 1
+            for ret_i, ret_row in st_ret.iterrows():
+                if ret_row['Return'] not in data_out:
+                    data_out[ret_row['Return']] = 1
+                else:
+                    data_out[ret_row['Return']] += 1
+            data_analyser.set_data(data_out)
+            data_analyser.split_data()
+            data_analyser.train()
+            print(station + ': ' + str(data_analyser.get_coef()))
+            '''    
             for weekday in range(0, 7):
                 data_out = {}
                 data_filtered_dep = utils.filter_departure_date(st_dep, weekday)
@@ -41,16 +59,18 @@ def start_teach_ui():  # Tämän metodin sisään kutsut algoritmin opettamiseks
                     data_out[id_asd] = sum_asd
 
                 # data_analyser.set_data(data_filtered)
-
+            
                 data_analyser.set_data(data_out)
                 data_analyser.split_data()
                 data_analyser.train()
                 if station in model:
                     model[station].update({weekday: data_analyser.get_coef()})
-                    #print(model)
+                    # print(model)
                 else:
                     model[station] = {weekday: data_analyser.get_coef()}
                 print(station + ', ' + str(weekday) + ': ' + str(data_analyser.get_coef()))
+            '''
+        '''    
         original_stdout = sys.stdout  # Save a reference to the original standard output
         filename = 'Data/asemadata/' + str(indeksi) + station + '_' + str(weekday) + '.txt'
         print(model)
@@ -60,12 +80,12 @@ def start_teach_ui():  # Tämän metodin sisään kutsut algoritmin opettamiseks
             sys.stdout = original_stdout  # Reset the standard output to its original value
 
         # print(data)
-        #data = data.get('Departure day').tolist()
+        # data = data.get('Departure day').tolist()
         # print(data)
         # data_analyser.set_data(data)
         # data_analyser.train()
         # print(data_analyser.get_prediction_coef())
-
+        '''
         if input("Lopetetaanko opettaminen k/e").lower() == "k":
             break
 
@@ -99,18 +119,23 @@ def start_use_ui():  # Tällä metodilla voidaan käyttää algoritmiä
             continue
 
     weekdays_fi = {
-        1: "maanantai",
-        2: "tiistai",
-        3: "keskiviikko",
-        4: "torstai",
-        5: "perjantai",
-        6: "lauantai",
-        7: "sunnuntai"
+        0: "maanantai",
+        1: "tiistai",
+        2: "keskiviikko",
+        3: "torstai",
+        4: "perjantai",
+        5: "lauantai",
+        6: "sunnuntai"
     }
     print("{:<8} {:<15}".format('Avain', 'Viikonpäivä'))
     for key, weekday in weekdays_fi.items():
         print("{:<8} {:<15}".format(key, weekday))
     weekday = input("\nSyötä viikonpäivää vastaava avain:")
+    mock_data = {1: {0: 1, 1: 2, 2: 3, 3: 4, 4: 5, 5: 6, 6: 7}}
+    summa = 0
+    for x in range(int(weekday)):
+        summa += mock_data[station_names[selected_station]][x]
+    print('pyöriä on: ' + str(summa))
 
 
 if __name__ == "__main__":
