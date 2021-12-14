@@ -3,6 +3,8 @@ import sys
 import project_modules.csv_reader as csv_reader
 import project_modules.data_analyser as data_analyser
 import project_modules.utils as utils
+import collections
+import warnings
 
 
 def start_teach_ui():  # Tämän metodin sisään kutsut algoritmin opettamiseksi
@@ -27,6 +29,8 @@ def start_teach_ui():  # Tämän metodin sisään kutsut algoritmin opettamiseks
             if st_ret.empty:
                 print('Asemaa ei löytynyt datasta!')
                 continue
+            st_dep.sort_values('Departure')
+            st_ret.sort_values('Return')
 
             data_out = {}
 
@@ -35,14 +39,22 @@ def start_teach_ui():  # Tämän metodin sisään kutsut algoritmin opettamiseks
                     data_out[dep_row['Departure']] = -1
                 else:
                     data_out[dep_row['Departure']] -= 1
+
             for ret_i, ret_row in st_ret.iterrows():
                 if ret_row['Return'] not in data_out:
                     data_out[ret_row['Return']] = 1
                 else:
                     data_out[ret_row['Return']] += 1
+            data_out2 = {}
+            for do_key, do_value in data_out.items():
+                data_out2[str(do_key)] = do_value
+
             print('valmis!')
             print('Luodaan mallia asemalle ' + station + '... ', end='')
-            data_analyser.set_data(data_out)
+            ordered_data = dict(sorted(data_out2.items()))
+            #print(ordered_data)
+            #print(data_out)
+            data_analyser.set_data(data_out2)
             data_analyser.split_data()
             data_analyser.train()
             data_analyser.predict()
@@ -141,18 +153,35 @@ def start_use_ui():  # Tällä metodilla voidaan käyttää algoritmiä
         print("{:<8} {:<15}".format(key, weekday))
     while True:
         weekday_key = input("\nSyötä viikonpäivää vastaava avain:")
-        hour = input("\nSyötä tunti:")
-
-        timestamp = str(weekday_key)+'.'+str(hour)
-
+        #hour = input("\nSyötä tunti:")
         data_analyser.load_model(str(station_names[selected_station]))
+        '''
+        for x in range(24):
+            if x < 10:
+                timestamp = str(weekday_key)+'.0'+str(x)
+            else:
+                timestamp = str(weekday_key) + '.' + str(x)
 
-        print('ennustus: ', data_analyser.do_predict(timestamp))
+            
+
+            print('Ennustus klo', x, data_analyser.do_predict(float(timestamp)))
+            
+            '''
+        day = []
+        for x in range(24):
+            if x < 10:
+
+                day.append([str(int(weekday_key) + x/10)])
+            else:
+                day.append([str(int(weekday_key) + x/100)])
+        for i, e in enumerate(data_analyser.do_predict(day)):
+            print('Ennustus klo',i,':', int(e))
         if input("Lopetetaanko ennustus k/e").lower() == "k":
             break
 
 
 if __name__ == "__main__":
+    warnings.filterwarnings("ignore")
     print("\n!!! HSL Kaupunkipyörien asematilanne ennustaja !!!\n")
     options = {
         1: "Algoritmin opetus",
