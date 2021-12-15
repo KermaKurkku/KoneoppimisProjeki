@@ -1,6 +1,7 @@
 *.csv
 *.joblib
 *.gz
+plots/*.png
 .idea
 .envs/*
 !.envs/empty.txt
