@@ -8,7 +8,6 @@ import warnings
 
 import time
 
-
 def start_teach_ui():  # Tämän metodin sisään kutsut algoritmin opettamiseksi
     station_data = csv_reader.get_stations().to_dict(
         'split')  # tähän tulee csv_readerillä luettu lista asemista
@@ -29,10 +28,8 @@ def start_teach_ui():  # Tämän metodin sisään kutsut algoritmin opettamiseks
             st_dep = utils.filter_departure_station(data, st_id)
             st_ret = utils.filter_return_station(data, st_id)
             if st_dep.empty:
-                # print('Asemaa ei löytynyt datasta!')
                 continue
             if st_ret.empty:
-                # print('Asemaa ei löytynyt datasta!')
                 continue
             st_dep.sort_values('Departure')
             st_ret.sort_values('Return')
@@ -54,64 +51,13 @@ def start_teach_ui():  # Tämän metodin sisään kutsut algoritmin opettamiseks
             for do_key, do_value in data_out.items():
                 data_out2[str(do_key)] = do_value
 
-            # print('valmis!')
-            # print('\rLuodaan mallia asemalle ' + station + '... ', end='')
             ordered_data = dict(sorted(data_out2.items()))
-            # print(ordered_data)
-            # print(data_out)
             data_analyser.set_data(data_out2)
             data_analyser.split_data()
             data_analyser.train()
             data_analyser.predict()
             data_analyser.plot_outputs(station)
             data_analyser.save_model(str(st_id))
-            # print('valmis!')
-
-            '''    
-            for weekday in range(0, 7):
-                data_out = {}
-                data_filtered_dep = utils.filter_departure_date(st_dep, weekday)
-                data_filtered_ret = utils.filter_departure_date(st_ret, weekday)
-
-                for i_qwe in range(len(data_filtered_dep.index)):
-                    data_out[i_qwe] = -1
-
-                save_i = len(data_out)
-                for i_etr in range(len(data_filtered_ret.index)):
-                    data_out[i_etr + save_i] = 1
-                sum_asd = 0
-                for id_asd, value in data_out.items():
-                    sum_asd = sum_asd + value
-                    data_out[id_asd] = sum_asd
-
-                # data_analyser.set_data(data_filtered)
-            
-                data_analyser.set_data(data_out)
-                data_analyser.split_data()
-                data_analyser.train()
-                if station in model:
-                    model[station].update({weekday: data_analyser.get_coef()})
-                    # print(model)
-                else:
-                    model[station] = {weekday: data_analyser.get_coef()}
-                print(station + ', ' + str(weekday) + ': ' + str(data_analyser.get_coef()))
-            '''
-        '''    
-        original_stdout = sys.stdout  # Save a reference to the original standard output
-        filename = 'Data/asemadata/' + str(indeksi) + station + '_' + str(weekday) + '.txt'
-        print(model)
-        with open('Data/asemadata/testimodel.txt', 'w') as f:
-            sys.stdout = f  # Change the standard output to the file we created.
-            print(model)
-            sys.stdout = original_stdout  # Reset the standard output to its original value
-
-        # print(data)
-        # data = data.get('Departure day').tolist()
-        # print(data)
-        # data_analyser.set_data(data)
-        # data_analyser.train()
-        # print(data_analyser.get_prediction_coef())
-        '''
 
 
 def start_validate_ui():  # Tämän metodin sisään kutsu algoritmin validointia varten
@@ -180,6 +126,8 @@ def start_use_ui():  # Tällä metodilla voidaan käyttää algoritmiä
                 day.append([str(int(weekday_key) + x / 10)])
             else:
                 day.append([str(int(weekday_key) + x / 100)])
+        day = [[str(int(weekday_key)+x/100)] for x in range(24)]
+        prev = 0
         for i, e in enumerate(data_analyser.do_predict(day)):
             print('Ennustus klo', i, ':', int(e))
         if input("Lopetetaanko ennustus k/e").lower() == "k":
