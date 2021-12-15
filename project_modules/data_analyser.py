@@ -177,7 +177,6 @@ lista = [[0.]
     , [6.23]]
 
 regr = gaussian_process.GaussianProcessRegressor()
-# regr =  linear_model.LinearRegression()
 rng = np.random.RandomState(1)
 
 global data_X
@@ -195,8 +194,7 @@ def set_data(data):
     global data_y
     data_X = np.array(list(data.keys())).reshape((-1, 1))
     data_y = np.array(list(data.values()))
-    # print('data_x',data_X)
-    # print('data_y',data_y)
+
 
 
 def split_data():
@@ -216,10 +214,6 @@ def train():
     global regr
     regr.fit(data_X_train, data_y_train)
 
-    # print('score',regr.score(data_X_test, data_y_test))
-    # print('Cross val score', cross_val_score(regr, data_X_train, data_y_train, cv=5))
-
-
 def predict():
     global data_y_pred
     #print(data_X_test)
@@ -227,19 +221,7 @@ def predict():
 
 
 def do_predict(day):
-    #print(day)
     return regr.predict(day)
-
-
-# The intercept (B0)
-# print('intercept:', regr.intercept_)
-# The coefficients (B1)
-# print("Coefficients: \n", regr.coef_)
-# The mean squared error
-# print("Mean squared error: %.2f" % mean_squared_error(data_y_test, data_y_pred))
-# The coefficient of determination: 1 is perfect prediction
-# print("Coefficient of determination: %.2f" % r2_score(data_y_test, data_y_pred))
-
 
 def get_coef():
     global regr
@@ -276,8 +258,6 @@ def load_model(station_id):
 
 
 def plot_outputs(station):
-    #print(data_X_test)
-    #print(len(data_y_pred))
     plt.clf()
     toinen_lista = list(range(len(data_y_pred)))
     plt.scatter(toinen_lista, data_y_test, color="red")
@@ -290,4 +270,3 @@ def plot_outputs(station):
     plt.title(station)
     filename = 'plots/' + station + '_plot.png'
     plt.savefig(filename)
-    # plt.show()
