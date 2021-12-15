@@ -1,0 +1,458 @@
+Station name,Station ID
+501,Hanasaari
+503,Keilalahti
+505,Westendinasema
+507,Golfpolku
+509,Revontulentie
+511,Sateentie
+513,Hakalehto
+515,Oravannahkatori
+517,Länsituuli
+518,Tuulimäki
+519,Tapionaukio
+521,Kulttuuriaukio
+523,Ahertajantie
+525,Mäntyviita
+527,Otsolahti
+529,Keilaniemi (M)
+531,Keilaranta
+532,Betonimies
+533,Tekniikantie
+537,Innopoli
+538,Hagalundinpuisto
+539,Aalto-yliopisto (M); Tietot
+541,Aalto-yliopisto (M); Korkea
+543,Otaranta
+545,Sähkömies
+547,Jämeräntaival
+549,Maarinranta
+551,Tietäjä
+553,Metsänneidonpolku
+555,Kalevalantie
+557,Louhentori
+559,Pohjankulma
+561,Koivu-Mankkaa
+563,Mankkaanlaaksontie
+565,Mankkaanaukio
+571,Tapiolan urheilupuisto
+573,Urheilupuisto (M)
+575,Tontunmäentie
+577,Olarinluoma
+579,Niittymaa
+581,Niittykumpu (M)
+583,Haukilahdenkatu
+585,Haukilahdenaukio
+587,Hauenkallio
+589,Haukilahdenranta
+591,Mellstenintie
+593,Toppelundintie
+595,Westendintie
+596,Toppelundinportti
+597,Linnakepolku
+601,Nokkala
+603,Matinlahdenranta
+607,Nuottaniementie
+609,Sepetlahdentie
+611,Matinkartanontie
+613,Matinkyläntie
+615,Tiistiläntie
+617,Tiistinkallio
+619,Etuniementie
+621,Hauenkalliontie
+623,Nelikkotie
+625,Suomenlahdentie
+627,Piispansilta
+629,Piispanportti
+631,Friisilänaukio
+633,Avaruuskatu
+635,Kuunkatu
+637,Ruomelantie
+639,Itäportti
+641,Komeetankatu
+643,Auringonkatu
+645,Piispankallio
+647,Lystimäki
+649,Lystimäensilta
+651,Suurpellonaukio
+653,Lukutori
+701,Gallen-Kallelan tie
+703,Elfvik
+705,Laajalahden keskus
+707,Majurinkulma
+709,Yhdyskunnankuja
+711,Kirjurinkuja
+713,Upseerinkatu
+715,Komentajankatu
+719,Säteri
+721,Säterinrinne
+723,Säterinniitty
+725,Rummunlyöjänkatu
+727,Ratsutori
+729,Leppävaaranaukio
+731,Leppävaarankäytävä
+733,Läkkitori
+735,Armas Launiksen katu
+737,Muurarinkuja
+739,Postipuun koulu
+741,Gransinmäki
+745,Leppävaaran urheilupuisto
+747,Leppävaaran uimahalli
+749,Vallikatu
+751,Vallipolku
+753,Linnuntie
+755,Kutsuntatie
+757,Painiitty
+761,Mäkkylän asema
+763,Kalkkipellonmäki
+767,Ruutikatu
+769,Tiurintie
+900,Orionintie
+901,O'Bike Station
+902,Derby Business Park
+001,Kaivopuisto
+002,Laivasillankatu
+003,Kapteeninpuistikko
+004,Viiskulma
+005,Sepänkatu
+006,Hietalahdentori
+007,Designmuseo
+008,Vanha kirkkopuisto
+009,Erottajan aukio
+010,Kasarmitori
+011,Unioninkatu
+012,Kanavaranta
+013,Merisotilaantori
+014,Senaatintori
+015,Ritarikatu
+016,Liisanpuistikko
+017,Varsapuistikko
+018,Porthania
+019,Rautatientori - itä
+020,Kaisaniemenpuisto
+021,Töölönlahdenkatu
+022,Rautatientori - länsi
+023,Kiasma
+024,Mannerheimintie
+025,Narinkka
+026,Kamppi (M)
+027,Eerikinkatu
+028,Lastenlehto
+029,Baana
+030,Itämerentori
+031,Marian sairaala
+032,Eläinmuseo
+033,Kauppakorkeakoulu
+034,Kansallismuseo
+035,Cygnaeuksenkatu
+036,Apollonkatu
+037,Töölönkatu
+038,Töölöntori
+039,Ooppera
+040,Hakaniemi (M)
+041,Ympyrätalo
+042,Haapaniemenkatu
+043,Karhupuisto
+044,Sörnäinen (M)
+045,Brahen kenttä
+046,Diakoniapuisto
+047,Vanha Kauppahalli
+048,Mastokatu
+049,Annankatu
+050,Melkonkuja
+051,Itälahdenkatu
+052,Heikkilänaukio
+053,Heikkiläntie
+054,Gyldenintie
+055,Puistokaari
+056,Luoteisväylä
+057,Lauttasaaren ostoskeskus
+058,Lauttasaarensilta
+059,Salmisaarenranta
+060,Kaapelitehdas
+061,Länsisatamankatu
+062,Välimerenkatu
+063,Jätkäsaarenlaituri
+064,Tyynenmerenkatu
+065,Hernesaarenranta
+066,Ehrenströmintie
+067,Perämiehenkatu
+068,Albertinkatu
+069,Kalevankatu
+070,Sammonpuistikko
+071,Hietaniemenkatu
+072,Eteläinen Hesperiankatu
+073,Kesäkatu
+074,Rajasaarentie
+075,Korjaamo
+076,Olympiastadion
+077,Nordenskiöldinaukio
+078,Messeniuksenkatu
+079,Uimastadion
+080,Jäähalli
+081,Stenbäckinkatu
+082,Töölöntulli
+083,Meilahden sairaala
+084,Paciuksenkatu
+085,Jalavatie
+086,Kuusitie
+087,Kustaankatu
+088,Kiskontie
+089,Tilkanvierto
+090,Paciuksenkaari
+091,Seurasaari
+092,Saunalahdentie
+093,Torpanranta
+094,Laajalahden aukio
+095,Munkkiniemen aukio
+096,Huopalahdentie
+098,Ulvilantie
+099,Muusantori
+100,Teljäntie
+101,Munkkivuoren ostoskeskus
+103,Vihdintie
+104,Kriikunakuja
+105,Tilkantori
+106,Korppaanmäentie
+107,Tenholantie
+108,Radiokatu
+109,Hertanmäenkatu
+110,Maistraatintori
+111,Esterinportti
+112,Rautatieläisenkatu
+113,Pasilan asema
+114,Ratapihantie
+115,Venttiilikuja
+116,Linnanmäki
+117,Brahen puistikko
+118,Fleminginkatu
+119,Gebhardinaukio
+120,Mäkelänkatu
+121,Vilhonvuorenkatu
+122,Lintulahdenkatu
+123,Näkinsilta
+124,Isoisänsilta
+125,Arielinkatu
+126,Kalasatama (M)
+127,Teurastamo
+128,Päijänteentie
+129,Pernajantie
+130,Teollisuuskatu
+131,Elimäenkatu
+132,Hollolantie
+133,Paavalinpuisto
+134,Haukilahdenkatu
+135,Velodrominrinne
+136,Sofianlehdonkatu
+137,Arabian kauppakeskus
+138,Arabiankatu
+139,Muotoilijankatu
+140,Verkatehtaanpuisto
+141,Intiankatu
+142,Koskelantie
+143,Kuikkarinne
+144,Käpyläntie
+145,Pohjolankatu
+146,Pohjolanaukio
+147,Käpylän asema
+148,Juhana Herttuan tie
+149,Toinen linja
+150,Töölönlahden puisto
+161,Eteläesplanadi
+162,Leppäsuonaukio
+163,Lehtisaarentie
+200,Länsiterminaali
+201,Länsisatamankuja
+202,Merihaka
+203,Opastinsilta
+204,A.I. Virtasen aukio
+205,Ilmalan asema
+206,Ruskeasuon varikko
+207,Vanha Viertotie
+208,Valimotie
+209,Takomotie
+210,Pajamäki
+211,Haagan tori
+212,Tunnelitie
+213,Huopalahden asema
+214,Valimon asema
+215,Pitäjänmäen asema
+216,Jännetie
+217,Marttila
+218,Pohjois-Haagan asema
+219,Näyttelijäntie
+220,Ida Aalbergin tie
+221,Thalianaukio
+222,Huovitie
+223,Hämeenlinnanväylä
+224,Vesakkotie
+225,Maunula
+226,Lepolantie
+227,Kylävoudintie
+228,Kustaankartano
+229,Käskynhaltijantie
+230,Mäkitorpantie
+231,Siltavoudintie
+232,Oulunkylän asema
+233,Kirkkoherrantie
+234,Otto Brandtin tie
+235,Katariina Saksilaisen katu
+236,Hernepellontie
+237,Aulangontie
+238,Pihlajamäki
+239,Viikin tiedepuisto
+240,Viikin normaalikoulu
+241,Agronominkatu
+242,Von Daehnin katu
+243,Mustikkamaa
+244,Relanderinaukio
+245,Kulosaari (M)
+246,Tupasaarentie
+247,Haakoninlahdenkatu
+248,Gunillantie
+249,Isosaarentie
+250,Reiherintie
+251,Laajasalon ostoskeskus
+252,Humalniementie
+253,Tammisalon aukio
+254,Agnetankuja
+255,Laivalahden puistotie
+256,Herttoniemenranta
+257,Margareetankuja
+258,Abraham Wetterin tie
+259,Petter Wetterin tie
+260,Herttoniemi (M)
+261,Asentajanpuisto
+262,Siilitie (M)
+263,Herttoniemen kirkko
+264,Eränkävijäntori
+265,Siilitie 9
+266,Siilitie 13
+267,Roihupelto
+268,Porolahden koulu
+269,Peukaloisentie
+270,Tulisuontie
+271,Prinsessantie
+272,Marjaniementie
+274,Voikukantie
+275,Itäkeskus (M)
+276,Puotinharju
+277,Marjaniemi
+278,Puotilantie
+279,Puotinkylän kartano
+280,Puotilan ostoskeskus
+281,Puotila (M)
+282,Karhulantie
+283,Alakiventie
+284,Myllypuro (M)
+285,Orpaanporras
+286,Mamsellimyllynkatu
+290,Vallilan varikko
+291,Itäkeskus Metrovarikko
+292,Koskelan varikko
+293,Korkeasaari
+294,Postipuisto
+301,Aurinkotuulenkatu
+302,Sumukuja
+303,Leikosaarentie
+304,Aurinkolahdenaukio
+305,Kalkkihiekantie
+306,Kauppakeskus Columbus
+315,Vuosaaren liikuntapuisto
+308,Mosaiikkitori
+309,Kaivonkatsojanpuisto
+310,Halkaisijantie
+311,Ramsinniementie
+312,Meri-Rastilan tori
+313,Rastila (M)
+314,Lokitie
+316,Punakiventie
+317,Haapasaarentie
+318,Vuosaaren puistopolku
+319,Purjetie
+320,Koukkusaarentie
+321,Vartioharjuntie
+322,Rukatunturintie
+323,Sallatunturintie
+325,Mellunmäki (M)
+324,Sinkilätie
+327,Humikkalankuja
+328,Lallukankuja
+329,Kurkimäki
+330,Kontula (M)
+326,Tuukkalantie
+331,Lettopolku
+332,Kontulankaari
+333,Kivikonkaari
+334,Varustuksentie
+335,Kurkimäentie
+336,Kivikonlaita
+337,Kivikon liikuntapuisto
+338,Jakomäentie
+340,Jakomäki
+339,Alppikylä
+341,Heikinlaakso
+342,Puistolan VPK
+343,Puistolantori
+344,Puistolan asema
+346,Maatullinkuja
+347,Sateenkaarentie
+348,Siltamäki
+349,Töyrynummentie
+350,Töyrynummi
+351,Kotinummentie
+345,Porvarintie
+353,Helluntairaitti
+352,Tapanilan asema
+354,Saniaiskuja
+355,Halmetie
+356,Laulurastaantie
+357,Vanha Tapanilantie
+358,Syystie
+359,Malmin sairaala
+360,Malmin asema
+361,Huhtakuja
+362,Teerisuontie
+364,Ala-Malmin tori
+363,Väärämäentie
+365,Karviaistie
+366,Tilketori
+367,Karhusuontie
+372,Jokipellontie
+368,Pukinmäen liikuntapuisto
+369,Pukinmäen asema
+370,Rapakiventie
+391,Tollinpolku
+373,Mikkolantie
+374,Etupellonpuisto
+375,Piikintie
+376,Torpparinmäentie
+379,Paloheinän kirjasto
+377,Paloheinän maja
+378,Paloheinäntie
+380,Pirkkolan liikuntapuisto
+381,Maununneva
+307,Ulappasilta
+382,Hakuninmaa
+383,Kuninkaantammi
+384,Kalannintie
+386,Kannelmäen liikuntapuisto
+385,Pajupillintie
+387,Kauppakeskus Kaari
+388,Kaustisentie
+389,Kannelmäen asema
+371,Savela
+390,Trumpettikuja
+392,Viljelijäntie
+393,Malminkartanon asema
+394,Tuohipolku
+395,Honkasuo
+396,Malminkartanonhuippu
+397,Hankasuontie
+398,Ajomiehentie
+399,Vähäntuvantie
+400,Kuusisaari
+401,Koivusaari (M)
+402,Bermudankuja
+403,Verkkosaari
+404,Sompasaari
+405,Jollas
