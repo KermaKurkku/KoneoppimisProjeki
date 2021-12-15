@@ -222,7 +222,7 @@ def train():
 
 def predict():
     global data_y_pred
-    print(data_X_test)
+    #print(data_X_test)
     data_y_pred = regr.predict(data_X_test)
 
 

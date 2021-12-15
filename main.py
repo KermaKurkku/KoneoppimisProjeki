@@ -6,6 +6,7 @@ import project_modules.utils as utils
 import collections
 import warnings
 
+import time
 
 def start_teach_ui():  # Tämän metodin sisään kutsut algoritmin opettamiseksi
     station_data = csv_reader.get_stations().to_dict(
@@ -15,19 +16,22 @@ def start_teach_ui():  # Tämän metodin sisään kutsut algoritmin opettamiseks
         station_names[data[0]] = data[1]
 
     while True:
-        if input("Haluatko luoda mallin? k/e").lower() != "k":
+        if input("Haluatko luoda uuden mallin? k/e").lower() != "k":
             break
         data = csv_reader.read_data()
-
+        asema = 0
         for st_id, station in station_names.items():
-            print('Valmistellaan dataa asemalle ' + station + '... ', end='')
+            asema += 1
+            sys.stdout.write("\rMallista valmiina %.2f%%" % ((asema / len(station_names))*100))
+            sys.stdout.flush()
+            #print('Valmistellaan dataa asemalle ' + station + '... ', end='')
             st_dep = utils.filter_departure_station(data, st_id)
             st_ret = utils.filter_return_station(data, st_id)
             if st_dep.empty:
-                print('Asemaa ei löytynyt datasta!')
+                #print('Asemaa ei löytynyt datasta!')
                 continue
             if st_ret.empty:
-                print('Asemaa ei löytynyt datasta!')
+                #print('Asemaa ei löytynyt datasta!')
                 continue
             st_dep.sort_values('Departure')
             st_ret.sort_values('Return')
@@ -49,8 +53,8 @@ def start_teach_ui():  # Tämän metodin sisään kutsut algoritmin opettamiseks
             for do_key, do_value in data_out.items():
                 data_out2[str(do_key)] = do_value
 
-            print('valmis!')
-            print('Luodaan mallia asemalle ' + station + '... ', end='')
+            #print('valmis!')
+            #print('\rLuodaan mallia asemalle ' + station + '... ', end='')
             ordered_data = dict(sorted(data_out2.items()))
             #print(ordered_data)
             #print(data_out)
@@ -60,7 +64,7 @@ def start_teach_ui():  # Tämän metodin sisään kutsut algoritmin opettamiseks
             data_analyser.predict()
             data_analyser.plot_outputs(station)
             data_analyser.save_model(str(st_id))
-            print('valmis!')
+            #print('valmis!')
 
 
             '''    
@@ -114,6 +118,10 @@ def start_teach_ui():  # Tämän metodin sisään kutsut algoritmin opettamiseks
 def start_validate_ui():  # Tämän metodin sisään kutsu algoritmin validointia varten
     while True:
         print("Validoidaan...")
+        for i in range(10000):
+            time.sleep(0.01)
+            sys.stdout.write("\r%.2f%%" % (i/100))
+            sys.stdout.flush()
         if input("Lopetetaanko validointi k/e").lower() == "k":
             break
 
