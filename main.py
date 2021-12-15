@@ -8,6 +8,7 @@ import warnings
 
 import time
 
+
 def start_teach_ui():  # Tämän metodin sisään kutsut algoritmin opettamiseksi
     station_data = csv_reader.get_stations().to_dict(
         'split')  # tähän tulee csv_readerillä luettu lista asemista
@@ -22,16 +23,16 @@ def start_teach_ui():  # Tämän metodin sisään kutsut algoritmin opettamiseks
         asema = 0
         for st_id, station in station_names.items():
             asema += 1
-            sys.stdout.write("\rMallista valmiina %.2f%%" % ((asema / len(station_names))*100))
+            sys.stdout.write("\rMallista valmiina %.2f%%" % ((asema / len(station_names)) * 100))
             sys.stdout.flush()
-            #print('Valmistellaan dataa asemalle ' + station + '... ', end='')
+            # print('Valmistellaan dataa asemalle ' + station + '... ', end='')
             st_dep = utils.filter_departure_station(data, st_id)
             st_ret = utils.filter_return_station(data, st_id)
             if st_dep.empty:
-                #print('Asemaa ei löytynyt datasta!')
+                # print('Asemaa ei löytynyt datasta!')
                 continue
             if st_ret.empty:
-                #print('Asemaa ei löytynyt datasta!')
+                # print('Asemaa ei löytynyt datasta!')
                 continue
             st_dep.sort_values('Departure')
             st_ret.sort_values('Return')
@@ -53,19 +54,18 @@ def start_teach_ui():  # Tämän metodin sisään kutsut algoritmin opettamiseks
             for do_key, do_value in data_out.items():
                 data_out2[str(do_key)] = do_value
 
-            #print('valmis!')
-            #print('\rLuodaan mallia asemalle ' + station + '... ', end='')
+            # print('valmis!')
+            # print('\rLuodaan mallia asemalle ' + station + '... ', end='')
             ordered_data = dict(sorted(data_out2.items()))
-            #print(ordered_data)
-            #print(data_out)
+            # print(ordered_data)
+            # print(data_out)
             data_analyser.set_data(data_out2)
             data_analyser.split_data()
             data_analyser.train()
             data_analyser.predict()
             data_analyser.plot_outputs(station)
             data_analyser.save_model(str(st_id))
-            #print('valmis!')
-
+            # print('valmis!')
 
             '''    
             for weekday in range(0, 7):
@@ -114,21 +114,26 @@ def start_teach_ui():  # Tämän metodin sisään kutsut algoritmin opettamiseks
         '''
 
 
-
 def start_validate_ui():  # Tämän metodin sisään kutsu algoritmin validointia varten
     while True:
         print("Validoidaan...")
-        for i in range(10000):
-            time.sleep(0.01)
-            sys.stdout.write("\r%.2f%%" % (i/100))
-            sys.stdout.flush()
+        station_data = csv_reader.get_stations().to_dict('split')
+        station_names = {}
+        for data in station_data.get('data'):
+            station_names[data[0]] = data[1]
+        for st_id, station in station_names.items():
+            data_analyser.load_model(str(st_id))
+            validate_result = data_analyser.validate_model()
+            print("Validoidaan asema:", station,
+                  "Score:", round(validate_result['score'], 4),
+                  "Crossval:", validate_result['cross val score'], "\n")
+            data_analyser.validate_model()
         if input("Lopetetaanko validointi k/e").lower() == "k":
             break
 
 
 def start_use_ui():  # Tällä metodilla voidaan käyttää algoritmiä
-    station_data = csv_reader.get_stations().to_dict(
-        'split')  # {1: "asema1", 2: "asema2", 3: "asema3"}  # tähän tulee csv_readerillä luettu lista asemista
+    station_data = csv_reader.get_stations().to_dict('split')
     station_names = {}
     for data in station_data.get('data'):
         station_names[data[1].lower()] = data[0]
@@ -161,29 +166,17 @@ def start_use_ui():  # Tällä metodilla voidaan käyttää algoritmiä
         print("{:<8} {:<15}".format(key, weekday))
     while True:
         weekday_key = input("\nSyötä viikonpäivää vastaava avain:")
-        #hour = input("\nSyötä tunti:")
         data_analyser.load_model(str(station_names[selected_station]))
-        '''
-        for x in range(24):
-            if x < 10:
-                timestamp = str(weekday_key)+'.0'+str(x)
-            else:
-                timestamp = str(weekday_key) + '.' + str(x)
 
-            
-
-            print('Ennustus klo', x, data_analyser.do_predict(float(timestamp)))
-            
-            '''
         day = []
         for x in range(24):
             if x < 10:
 
-                day.append([str(int(weekday_key) + x/10)])
+                day.append([str(int(weekday_key) + x / 10)])
             else:
-                day.append([str(int(weekday_key) + x/100)])
+                day.append([str(int(weekday_key) + x / 100)])
         for i, e in enumerate(data_analyser.do_predict(day)):
-            print('Ennustus klo',i,':', int(e))
+            print('Ennustus klo', i, ':', int(e))
         if input("Lopetetaanko ennustus k/e").lower() == "k":
             break
 

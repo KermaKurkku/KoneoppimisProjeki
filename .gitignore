@@ -1,5 +1,6 @@
 *.csv
 *.joblib
+*.gz
 .idea
 .envs/*
 !.envs/empty.txt

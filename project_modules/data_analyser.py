@@ -216,18 +216,20 @@ def train():
     global regr
     regr.fit(data_X_train, data_y_train)
 
-    # print('score',regr.score(data_X_test, data_y_test))
-    # print('Cross val score', cross_val_score(regr, data_X_train, data_y_train, cv=5))
+
+def validate_model():
+    return {'score': regr.score(data_X_test, data_y_test),
+            'cross val score': cross_val_score(regr, data_X_train, data_y_train, cv=5)}
 
 
 def predict():
     global data_y_pred
-    #print(data_X_test)
+    # print(data_X_test)
     data_y_pred = regr.predict(data_X_test)
 
 
 def do_predict(day):
-    #print(day)
+    # print(day)
     return regr.predict(day)
 
 
@@ -264,20 +266,33 @@ def get_r2score():
 
 
 def save_model(station_id):
-    global regr
-    filename = 'models/station' + station_id + '_model.joblib'
-    dump(regr, filename)
+    to_save = {'regr': regr,
+               'data_X_test': data_X_test,
+               'data_y_test': data_y_test,
+               'data_X_train': data_X_train,
+               'data_y_train': data_y_train}
+    filename = 'models/station' + station_id + '_model.joblib.gz'
+    dump(to_save, filename, compress='gzip')
 
 
 def load_model(station_id):
     global regr
-    filename = 'models/station' + station_id + '_model.joblib'
-    regr = load(filename)
+    global data_X_train
+    global data_y_train
+    global data_X_test
+    global data_y_test
+    filename = 'models/station' + station_id + '_model.joblib.gz'
+    loaded = load(filename)
+    regr = loaded['regr']
+    data_X_train = loaded['data_X_train']
+    data_y_train = loaded['data_y_train']
+    data_X_test = loaded['data_X_test']
+    data_y_test = loaded['data_y_test']
 
 
 def plot_outputs(station):
-    #print(data_X_test)
-    #print(len(data_y_pred))
+    # print(data_X_test)
+    # print(len(data_y_pred))
     plt.clf()
     toinen_lista = list(range(len(data_y_pred)))
     plt.scatter(toinen_lista, data_y_test, color="red")
