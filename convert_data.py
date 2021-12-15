@@ -28,10 +28,8 @@ for i, row in enumerate(data):
 	except ValueError:
 		print('incorrect row')
 		data.remove(row)
-#new_f_name = fpath.replace('/tmp/convertDataPy/new-', '')
 file = open(fpath, "w")
 writer = csv.writer(file)
 writer.writerows(data)
 file.close()
-#data.to_csv(str(pathlib.Path().resolve())+'/Data/converted/'+fname)
 

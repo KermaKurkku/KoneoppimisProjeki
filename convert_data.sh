@@ -34,22 +34,6 @@ combine() {
     ' "$1" 
 }
 
-convert() {
-	gawk 'BEGIN {FS=",";}
-		NR==1 {print "Departure day,Departure hour,Return day,return hour,Departure station id,Return station id"}
-		{
-			gsub(/\./, ",")
-			gsub(/\"/, "")
-			if (NR!=1 && NF<6) {
-				e++
-				print $0 > "/dev/stderr"
-			} else {
-				print $0
-			}
-		} END {print "Incorrect rows ",  e > "/dev/stderr"}
-	' "$1"
-}
-
 cwd=$PWD
 
 cd "$1"
@@ -71,8 +55,5 @@ do
 	echo "Combining files"
 	combine $i >> $cwd/Data/station_data.csv
 done
-
-
-#convert station_data-temp.csv > $cwd/Data/station_data.csv
 
 rm -rf /tmp/convertDataPy
