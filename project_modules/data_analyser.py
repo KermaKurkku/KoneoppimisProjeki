@@ -12,6 +12,8 @@ import project_modules.utils as utils
 from joblib import dump, load
 from matplotlib import pyplot as plt
 
+from sklearn.gaussian_process.kernels import RBF, WhiteKernel
+
 lista = [[0.]
     , [0.01]
     , [0.04]
@@ -176,8 +178,11 @@ lista = [[0.]
     , [6.22]
     , [6.23]]
 
-regr = gaussian_process.GaussianProcessRegressor()
-rng = np.random.RandomState(1)
+# Kokeilemalla saatu
+kernel = 1.0 * RBF(length_scale=1.0, length_scale_bounds=(1e-2, 1e3)) + WhiteKernel(
+    noise_level=1e-5, noise_level_bounds=(1e-10, 1e5)
+)
+regr = gaussian_process.GaussianProcessRegressor(kernel=kernel, alpha=0.0)
 
 global data_X
 global data_y
@@ -217,7 +222,8 @@ def train():
 
 def validate_model():
     return {'score': regr.score(data_X_test, data_y_test),
-            'cross val score': cross_val_score(regr, data_X_train, data_y_train, cv=5)}
+            'cross val score': cross_val_score(regr, data_X_train, data_y_train, cv=5).mean(),
+            'cross val st deviation': cross_val_score(regr, data_X_train, data_y_train, cv=5).std()}
 
 
 def predict():
