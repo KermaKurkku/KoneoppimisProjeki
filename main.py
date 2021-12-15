@@ -121,13 +121,18 @@ def start_validate_ui():  # Tämän metodin sisään kutsu algoritmin validointi
         station_names = {}
         for data in station_data.get('data'):
             station_names[data[0]] = data[1]
+        score_sum = 0
+        validated_num = 0
         for st_id, station in station_names.items():
-            data_analyser.load_model(str(st_id))
+            print("Validoidaan asema", station, ": ", end="")
+            if data_analyser.load_model(str(st_id)) == -1:
+                continue
             validate_result = data_analyser.validate_model()
-            print("Validoidaan asema:", station,
-                  "Score:", round(validate_result['score'], 4),
+            print("Score:", round(validate_result['score'], 4),
                   "Crossval:", validate_result['cross val score'], "\n")
-            data_analyser.validate_model()
+            score_sum += validate_result['score']
+            validated_num += 1
+        print("\nScore KA:", round((score_sum / validated_num), 2))
         if input("Lopetetaanko validointi k/e").lower() == "k":
             break
 

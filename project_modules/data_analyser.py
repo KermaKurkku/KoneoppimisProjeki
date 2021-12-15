@@ -282,12 +282,16 @@ def load_model(station_id):
     global data_X_test
     global data_y_test
     filename = 'models/station' + station_id + '_model.joblib.gz'
-    loaded = load(filename)
-    regr = loaded['regr']
-    data_X_train = loaded['data_X_train']
-    data_y_train = loaded['data_y_train']
-    data_X_test = loaded['data_X_test']
-    data_y_test = loaded['data_y_test']
+    try:
+        loaded = load(filename)
+        regr = loaded['regr']
+        data_X_train = loaded['data_X_train']
+        data_y_train = loaded['data_y_train']
+        data_X_test = loaded['data_X_test']
+        data_y_test = loaded['data_y_test']
+    except FileNotFoundError:
+        print("mallia ei löytynyt")
+        return -1
 
 
 def plot_outputs(station):
