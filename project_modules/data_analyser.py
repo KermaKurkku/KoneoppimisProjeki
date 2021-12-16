@@ -14,9 +14,13 @@ from matplotlib import pyplot as plt
 
 from sklearn.gaussian_process.kernels import RBF, WhiteKernel
 
-lista = [[0.]
+lista = [
+    [0.]
     , [0.01]
+    , [0.02]
+    , [0.03]
     , [0.04]
+    , [0.05]
     , [0.06]
     , [0.07]
     , [0.08]
@@ -36,6 +40,7 @@ lista = [[0.]
     , [0.22]
     , [0.23]
     , [1.]
+    , [1.1]
     , [1.02]
     , [1.03]
     , [1.04]
@@ -63,6 +68,7 @@ lista = [[0.]
     , [2.02]
     , [2.03]
     , [2.04]
+    , [2.05]
     , [2.06]
     , [2.07]
     , [2.08]
@@ -201,7 +207,6 @@ def set_data(data):
     data_y = np.array(list(data.values()))
 
 
-
 def split_data():
     global data_X
     global data_y
@@ -235,6 +240,7 @@ def predict():
 def do_predict(day):
     # print(day)
     return regr.predict(day)
+
 
 def get_coef():
     global regr
@@ -290,13 +296,14 @@ def load_model(station_id):
 def plot_outputs(station):
     plt.clf()
     toinen_lista = list(range(len(data_y_pred)))
-    plt.scatter(toinen_lista, data_y_test, color="red")
-    plt.plot(toinen_lista, data_y_pred, color="blue", linewidth=3)
-
-    plt.xticks(lista)
+    plt.scatter(toinen_lista, data_y_test, color="red", label="Todelliset määrät")
+    plt.plot(toinen_lista, data_y_pred, color="blue", linewidth=3, label="Ennuste")
+    if len(toinen_lista[::24]) == 7:
+        plt.xticks(toinen_lista[::24], ['MA','TI','KE','TO','PE','LA','SU'])
     plt.yticks()
-    plt.xlabel('Aika')
-    plt.ylabel('pyörien määrä')
+    plt.xlabel('Päivä')
+    plt.ylabel('Pyörien määrä')
     plt.title(station)
+    plt.legend()
     filename = 'plots/' + station + '_plot.png'
     plt.savefig(filename)

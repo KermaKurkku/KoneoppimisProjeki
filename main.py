@@ -68,6 +68,8 @@ def start_validate_ui():  # Tämän metodin sisään kutsu algoritmin validointi
         for data in station_data.get('data'):
             station_names[data[0]] = data[1]
         score_sum = 0
+        score_max = -100.0
+        score_min = 100.0
         validated_num = 0
         for st_id, station in station_names.items():
             print("Validoidaan asema", station, ": ", end="")
@@ -76,8 +78,15 @@ def start_validate_ui():  # Tämän metodin sisään kutsu algoritmin validointi
             validate_result = data_analyser.validate_model()
             print("Score:", round(validate_result['score'], 4),
                   "Crossval:", validate_result['cross val score'], "\n")
+            if validate_result['score'] < score_min:
+                score_min = validate_result['score']
+            if validate_result['score'] > score_max:
+                score_max = validate_result['score']
+
             score_sum += validate_result['score']
             validated_num += 1
+        print("\nScore MIN:", round(score_min, 2))
+        print("\nScore MAX:", round(score_max, 2))
         print("\nScore KA:", round((score_sum / validated_num), 2))
         if input("Lopetetaanko validointi k/e").lower() == "k":
             break
@@ -116,7 +125,9 @@ def start_use_ui():  # Tällä metodilla voidaan käyttää algoritmiä
     for key, weekday in weekdays_fi.items():
         print("{:<8} {:<15}".format(key, weekday))
     while True:
-        weekday_key = input("\nSyötä viikonpäivää vastaava avain:")
+        weekday_key = input("\nSyötä viikonpäivää vastaava avain (Lopeta syöttämällä -1):")
+        if weekday_key == '-1':
+            break
         data_analyser.load_model(str(station_names[selected_station]))
 
         day = []
