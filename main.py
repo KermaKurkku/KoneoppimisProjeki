@@ -6,7 +6,6 @@ import project_modules.utils as utils
 import collections
 import warnings
 
-import time
 
 def start_teach_ui():  # Tämän metodin sisään kutsut algoritmin opettamiseksi
     station_data = csv_reader.get_stations().to_dict(
@@ -16,7 +15,7 @@ def start_teach_ui():  # Tämän metodin sisään kutsut algoritmin opettamiseks
         station_names[data[0]] = data[1]
 
     while True:
-        if input("Haluatko luoda uuden mallin? k/e").lower() != "k":
+        if input("\nHaluatko luoda uuden mallin? k/e").lower() != "k":
             break
         data = csv_reader.read_data()
         asema = 0
@@ -51,7 +50,7 @@ def start_teach_ui():  # Tämän metodin sisään kutsut algoritmin opettamiseks
             for do_key, do_value in data_out.items():
                 data_out2[str(do_key)] = do_value
 
-            ordered_data = dict(sorted(data_out2.items()))
+            #ordered_data = dict(sorted(data_out2.items()))
             data_analyser.set_data(data_out2)
             data_analyser.split_data()
             data_analyser.train()
@@ -60,7 +59,7 @@ def start_teach_ui():  # Tämän metodin sisään kutsut algoritmin opettamiseks
             data_analyser.save_model(str(st_id))
 
 
-def start_validate_ui():  # Tämän metodin sisään kutsu algoritmin validointia varten
+def start_validate_ui():
     while True:
         print("Validoidaan...")
         station_data = csv_reader.get_stations().to_dict('split')
@@ -101,9 +100,9 @@ def start_use_ui():  # Tällä metodilla voidaan käyttää algoritmiä
         selected_station = input(
             "Syötä Kaupunkipyöräaseman nimi (saat listan asemista kirjoittamalla \"help\"):").lower()
         if selected_station == "help":
-            print("{:<10} {:<20}".format('Aseman id', 'Aseman nimi'))
+            print("{:<30} {:<10}".format('Aseman nimi', 'Aseman id'))
             for station_id, station_name in station_names.items():
-                print("{:<10} {:<20}".format(station_id, station_name))
+                print("{:<30} {:<10}".format(station_id, station_name))
             continue
         elif selected_station in [station.lower() for station in station_names.keys()]:
             print(f"Kaupunkipyöräasema {selected_station} löytyi\n")
